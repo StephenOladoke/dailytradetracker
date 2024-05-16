@@ -56,25 +56,25 @@
 /* 1. TEMPLATE BACKGROUNDS */
 /* 1.1. hero slider IMG BACKGROUND */
 .bg-img-1 {
-background-image: url(../img/background/hero-bg-1.jpg);
+background-image: url(../img/background/02.jpg);
 }
 
 .bg-img-2 {
-background-image: url(../img/background/hero-bg-2.jpg);
+background-image: url(../img/background/01.jpg);
 }
 
-.bg-img-3 {
+/* .bg-img-3 {
 background-image: url(../img/background/hero-bg-3.jpg);
 }
 
 .bg-img-4 {
 background-image: url(../img/background/hero-bg-4.jpg);
-}
+} */
 
 
 /* 1.2. about IMG BACKGROUND */
 .post-box-photo-about-1 {
-background-image: url(../img/about/about-1.jpg);
+background-image: url(../img/about/01.jpg);
 }
 
 .post-box-photo-about-2 {
@@ -134,6 +134,20 @@ background-image: url(../img/news/news-4.jpg);
 background-image: url(../img/contact/contact.jpg);
 }
 
+.buy-now-button {
+  background-color: #ff264a;
+  color: #fff !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.buy-now-button:hover {
+  background-color: #d21e42;
+}
 
 /* 2. reset */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, /* img */, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
