@@ -112,7 +112,7 @@ $(function() {
     // 4. owl carousel
     // 4.1. owl about carousel
     $("#about-carousel").owlCarousel({
-        loop: true,
+        loop: false,
         center: false,
         items: 1,
         margin: 20,
