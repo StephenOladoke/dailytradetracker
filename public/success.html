@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #ff264a;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .icon-container {
+      display: inline-block;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      background-color: #ff264a;
+      margin-bottom: 20px;
+    }
+    .icon {
+      color: #000;
+      font-size: 48px;
+      line-height: 100px; /* Vertically center the icon */
+      display: inline-block; /* Ensures proper centering */
+    }
+    h1, p {
+      margin: 0;
+    }
+    .download-button {
+      background-color: #ff264a;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: inline-block; /* Ensure button is displayed inline */
+    }
+    .download-button:hover {
+      background-color: #ff3f63;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon-container">
+      <span class="icon">&#10003;</span>
+    </div>
+    <h1>Payment Successful</h1>
+    <p>Thank you for your purchase!</p><br>
+    <button class="download-button" onclick="window.location.href='how-to-guide.pdf'">Download</button>
+  </div>
+</body>
+</html>
