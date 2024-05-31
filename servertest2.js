@@ -15,38 +15,7 @@ app.use(express.static('public'));
 app.use('/create-checkout-session', bodyParser.json());
 app.use('/create-checkout-session', bodyParser.urlencoded({ extended: true }));
 
-
-app.post('/create-checkout-session', async (req, res) => {
-  try {
-    
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'ngn',
-          product_data: {
-            name: 'Notion Template',
-          },
-          unit_amount: 500000, // $10.00
-        },
-        quantity: 1,
-      }],
-      mode: 'payment',
-      success_url: 'http://localhost:4242/success.html',
-      cancel_url: 'http://localhost:4242/cancel.html',
-    });
-
-    console.log('Session created:', session.id);
-
-    // Respond with the session ID
-    res.json({ id: session.id });
-  } catch (error) {
-    console.error(`Error creating checkout session: ${error}`);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// Webhook and email functionality
+// Stripe webhook endpoint
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -60,6 +29,7 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
     return res.sendStatus(400);
   }
 
+  // Handle the event
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
@@ -73,6 +43,34 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
   res.status(200).end();
 });
 
+// Route to create a Stripe Checkout session
+app.post('/create-checkout-session', async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Notion Template',
+          },
+          unit_amount: 1000, // $10.00
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: 'http://localhost:4242/success.html',
+      cancel_url: 'http://localhost:4242/cancel.html',
+    });
+
+    res.json({ id: session.id });
+  } catch (error) {
+    console.error(`Error creating checkout session: ${error}`);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Function to send email
 async function sendEmail(to, amount) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -98,6 +96,7 @@ async function sendEmail(to, amount) {
   }
 }
 
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

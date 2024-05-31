@@ -1,56 +1,19 @@
-require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('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'); // Replace with your Stripe secret key
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = process.env.PORT || 4242;
+const port = 4242;
 
-// Middleware to serve static files from the 'public' directory
-app.use(express.static('public'));
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-
-// Middleware for JSON parsing on specific routes
-app.use('/create-checkout-session', bodyParser.json());
-app.use('/create-checkout-session', bodyParser.urlencoded({ extended: true }));
-
-
-app.post('/create-checkout-session', async (req, res) => {
-  try {
-    
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'ngn',
-          product_data: {
-            name: 'Notion Template',
-          },
-          unit_amount: 500000, // $10.00
-        },
-        quantity: 1,
-      }],
-      mode: 'payment',
-      success_url: 'http://localhost:4242/success.html',
-      cancel_url: 'http://localhost:4242/cancel.html',
-    });
-
-    console.log('Session created:', session.id);
-
-    // Respond with the session ID
-    res.json({ id: session.id });
-  } catch (error) {
-    console.error(`Error creating checkout session: ${error}`);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// Webhook and email functionality
+// Stripe webhook endpoint
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
+  const webhookSecret = 'whsec_8ffe1c4bd859eb694887fa9e7ac2682748d0c7b22939aabb53bd38cde0883ff2'; // Replace with your Webhook signing secret
   let event;
 
   try {
@@ -60,10 +23,13 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
     return res.sendStatus(400);
   }
 
+  // Handle the event
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
       const customerEmail = session.customer_details.email;
+
+      // Send email with Notion template and receipt
       await sendEmail(customerEmail, session.amount_total / 100);
       break;
     default:
@@ -73,17 +39,19 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, r
   res.status(200).end();
 });
 
+// Function to send email
 async function sendEmail(to, amount) {
+  // Set up Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: 'stephenoladoke6@gmail.com', // Replace with your email
+      pass: 'Boluwatife$2468', // Replace with your email password or an app-specific password
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: 'your-email@gmail.com',
     to: to,
     subject: 'Your Notion Template and Receipt',
     text: `Thank you for your purchase! Here is your Notion template: [link to template].
@@ -98,6 +66,7 @@ async function sendEmail(to, amount) {
   }
 }
 
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
