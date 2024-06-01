@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // Middleware to serve static files from the 'public' directory
 app.use(express.static('public'));
@@ -32,8 +32,8 @@ app.post('/create-checkout-session', async (req, res) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: 'http://localhost:3000/success.html',
-      cancel_url: 'http://localhost:3000/cancel.html',
+      success_url: 'http://localhost:8080/success.html',
+      cancel_url: 'http://localhost:8080/cancel.html',
     });
 
     console.log('Session created:', session.id);
