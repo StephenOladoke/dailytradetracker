@@ -4,8 +4,7 @@
   "description": "A simple trade tracking application",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "npm run your-build-command"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
