@@ -34,6 +34,6 @@ app.post('/webhook', bodyParser.raw({type:"application/json"}), async(req, res) 
     })
 })
 
-app.listen(4242, () => {
-    console.log('Server is running on port 4242')
+app.listen(3000, () => {
+    console.log('Server is running on port 3000')
 })
