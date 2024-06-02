@@ -32,8 +32,10 @@ app.post('/create-checkout-session', async (req, res) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: 'http://localhost:8080/success.html',
-      cancel_url: 'http://localhost:8080/cancel.html',
+      success_url: 'https://www.dailytradetracker.com/success.html',
+      cancel_url: 'https://www.dailytradetracker.com/cancel.html',
+      // success_url: 'http://localhost:8080/success.html',
+      // cancel_url: 'http://localhost:8080/cancel.html',
     });
 
     console.log('Session created:', session.id);
