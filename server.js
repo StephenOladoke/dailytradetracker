@@ -25,7 +25,7 @@ app.post('/create-checkout-session', async (req, res) => {
         price_data: {
           currency: 'ngn',
           product_data: {
-            name: 'Notion Template',
+            name: 'Daily Trade Tracker Template',
           },
           unit_amount: 4000000, // $10.00
         },
