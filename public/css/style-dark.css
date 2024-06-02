@@ -2240,6 +2240,23 @@ height: 320px;
   }
 }
 
+/* "Buy Now" Button Two */
+#contact-form2 {
+  width: 100%;
+  margin: -20px 0 0 -15px;
+  padding: 0;
+  }
+  
+  #contact-form2 {
+  height: 320px;
+  }
+  
+  @media only screen and (max-width: 995px) {
+    #contact-form2 {
+      height: 350px;
+    }
+  }
+
 form {
 margin: 0;
 padding: 0;
