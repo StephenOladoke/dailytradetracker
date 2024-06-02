@@ -27,7 +27,7 @@ app.post('/create-checkout-session', async (req, res) => {
           product_data: {
             name: 'Notion Template',
           },
-          unit_amount: 100000, // $10.00
+          unit_amount: 4000000, // $10.00
         },
         quantity: 1,
       }],
