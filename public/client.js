@@ -2,6 +2,7 @@ const stripe = Stripe('pk_live_51PGnOZEePaIrUnLNbTcjzEUYQUwGpYfwYz7y1EDXqqJWH1lF
 
 const paymentForm = document.getElementById('contact-form');
 
+
 paymentForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
