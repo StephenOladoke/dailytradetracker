@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')('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'); // Replace with your Stripe secret key
+const stripe = require('stripe')(''); // Replace with your Stripe secret key
 const nodemailer = require('nodemailer');
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Stripe webhook endpoint
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
-  const webhookSecret = 'whsec_8ffe1c4bd859eb694887fa9e7ac2682748d0c7b22939aabb53bd38cde0883ff2'; // Replace with your Webhook signing secret
+  const webhookSecret = ''; // Replace with your Webhook signing secret
   let event;
 
   try {
@@ -45,8 +45,8 @@ async function sendEmail(to, amount) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'stephenoladoke6@gmail.com', // Replace with your email
-      pass: 'Boluwatife$2468', // Replace with your email password or an app-specific password
+      user: '', // Replace with your email
+      pass: '', // Replace with your email password or an app-specific password
     },
   });
 

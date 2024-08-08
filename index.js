@@ -1,13 +1,13 @@
 const express = require('express')
 
-const stripe = require('stripe')("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")
+const stripe = require('stripe')("")
 
 const bodyParser = require('body-parser')
 
 const app = express()
 
 app.post('/webhook', bodyParser.raw({type:"application/json"}), async(req, res) => {
-    let signingsecret = "whsec_8ffe1c4bd859eb694887fa9e7ac2682748d0c7b22939aabb53bd38cde0883ff2";
+    let signingsecret = "";
 
     const payload = req.body
     const sig = req.headers['stripe-signature']

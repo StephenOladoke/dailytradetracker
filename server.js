@@ -23,7 +23,7 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: [{
         price_data: {
-          currency: 'ngn',
+          currency: 'usd',
           product_data: {
             name: 'Daily Trade Tracker Template',
           },
